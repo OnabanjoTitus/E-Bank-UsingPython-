@@ -10,7 +10,7 @@ def BankingHall():
             if userInput == 2:
                 CustomerEnquires()
             if userInput == 4:
-                Transactions()
+                BankTransactions()
             userInput = int(input("Enter 1 to open an account\nEnter 2 For Customer Enquires\nAnd 3 to exit Bank"))
     except ValueError as e:
         print("Invalid User Input")

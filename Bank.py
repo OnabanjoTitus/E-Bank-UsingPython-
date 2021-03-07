@@ -7,6 +7,7 @@ import uuid
 BankRecordsForCustomer = {}
 BankRecordsForAccountTypes = {}
 CustomerPinsRecords = {}
+CustomerAccountBalance = {}
 accountNumberFromUUID = uuid.uuid4()
 accountNumberFromUUID = str(accountNumberFromUUID)
 
@@ -23,6 +24,8 @@ def Bank():
             print((BankRecordsForCustomer[accountNumberFromUUID]))
             print((BankRecordsForAccountTypes[accountNumberFromUUID]))
             print(f"AccountId is: {accountNumberFromUUID}\n")
+            AccountBalance = CustomerBalance()
+            CustomerAccountBalance[accountNumberFromUUID] = AccountBalance
             CustomerPinSettings()
 
 
@@ -51,13 +54,19 @@ def CustomerEnquires():
                 accountPin = int(input("Enter Pin"))
                 if CustomerPinsRecords[accountNumberForEnquiries] == accountPin:
                     print((BankRecordsForCustomer[accountNumberForEnquiries]))
-                    print((BankRecordsForAccountTypes[accountNumberForEnquiries])+"\n")
+                    print((BankRecordsForAccountTypes[accountNumberForEnquiries]) + "\n")
             except ValueError as e:
                 print("Invalid pin")
             except KeyError as k:
                 print("Invalid key input")
     except KeyError as k:
         print("Invalid AccountId")
+
+
+def BankTransactions():
+    ReturnValue = Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccountBalance)
+    CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
+    CustomerBalanceUpdater(ReturnValue[1])
 
 
 if __name__ == '__main__':

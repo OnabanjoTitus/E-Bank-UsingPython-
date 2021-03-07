@@ -1,3 +1,6 @@
+CustomerInitialDeposit = 0
+
+
 def accountTypes():
     accountType = input("Enter the accountType")
     accountType = accountType.capitalize()
@@ -11,8 +14,10 @@ def accountTypes():
 def savingsAccount():
     try:
         InitialDeposit = int(input("Enter the initial deposit"))
-        CustomerBalance(InitialDeposit)
-        accountStatus = "Savings Account and accountBalance is " + str(InitialDeposit)
+        global CustomerInitialDeposit
+        CustomerInitialDeposit = InitialDeposit
+        CustomerBalance()
+        accountStatus = "Savings Account and accountBalance is " + str(CustomerInitialDeposit)
         return accountStatus
     except ValueError as e:
         print("Invalid value for amount")
@@ -29,8 +34,13 @@ def currentAccount():
         print(e)
 
 
-def CustomerBalance(customerBalance):
-    return customerBalance
+def CustomerBalance():
+    return CustomerInitialDeposit
+
+
+def CustomerBalanceUpdater(updatedBalance):
+    global CustomerInitialDeposit
+    CustomerInitialDeposit = updatedBalance
 
 
 if __name__ == '__main__':
