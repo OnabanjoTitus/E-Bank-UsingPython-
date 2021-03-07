@@ -3,14 +3,17 @@ def accountTypes():
     accountType = accountType.capitalize()
 
     if accountType == 'Savings':
-        savingsAccount()
+        return savingsAccount()
     if accountType == 'Current':
-        currentAccount()
+        return currentAccount()
 
 
 def savingsAccount():
     try:
         InitialDeposit = int(input("Enter the initial deposit"))
+        CustomerBalance(InitialDeposit)
+        accountStatus = "Savings Account and accountBalance is " + str(InitialDeposit)
+        return accountStatus
     except ValueError as e:
         print("Invalid value for amount")
         print(e)
@@ -19,9 +22,15 @@ def savingsAccount():
 def currentAccount():
     try:
         InitialDeposit = int(input("Enter the initial deposit"))
+        accountStatus = "Current Account and accountBalance is " + str(InitialDeposit)
+        return accountStatus
     except ValueError as e:
         print("Invalid value for amount")
         print(e)
+
+
+def CustomerBalance(customerBalance):
+    return customerBalance
 
 
 if __name__ == '__main__':
