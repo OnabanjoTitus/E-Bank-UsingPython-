@@ -66,7 +66,7 @@ def CustomerEnquires():
 def BankTransactions():
     ReturnValue = Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccountBalance)
     CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
-    CustomerBalanceUpdater(ReturnValue[1])
+
 
 
 if __name__ == '__main__':
