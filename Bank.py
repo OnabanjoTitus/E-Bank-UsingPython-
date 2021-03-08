@@ -8,12 +8,17 @@ BankRecordsForCustomer = {}
 BankRecordsForAccountTypes = {}
 CustomerPinsRecords = {}
 CustomerAccountBalance = {}
-accountNumberFromUUID = uuid.uuid4()
-accountNumberFromUUID = str(accountNumberFromUUID)
+
+accountNumberGlobal: str
 
 
 def Bank():
+    accountNumberFromUUID = uuid.uuid4()
+    accountNumberFromUUID = str(accountNumberFromUUID)
+    global accountNumberGlobal
+    accountNumberGlobal = accountNumberFromUUID
     type(accountNumberFromUUID)
+
     customerInfo = Customer()
     if customerInfo:
         accountTypesInfo = accountTypes()
@@ -56,7 +61,7 @@ def CustomerEnquires():
                     print((BankRecordsForCustomer[accountNumberForEnquiries]))
                     print(f"Account Type is {BankRecordsForAccountTypes[accountNumberForEnquiries]} and the Customer "
                           f"balance is "
-                          f" {CustomerAccountBalance[accountNumberFromUUID]}\n")
+                          f" {CustomerAccountBalance[accountNumberGlobal]}\n")
             except ValueError as e:
                 print("Invalid pin")
             except KeyError as k:
@@ -66,8 +71,11 @@ def CustomerEnquires():
 
 
 def BankTransactions():
-    ReturnValue = Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccountBalance)
-    CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
+    try:
+        ReturnValue = Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccountBalance)
+        CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
+    except TypeError as e:
+        print("Incorrect 1User Information")
 
 
 if __name__ == '__main__':
