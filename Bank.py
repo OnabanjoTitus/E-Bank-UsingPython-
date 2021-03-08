@@ -20,12 +20,12 @@ def Bank():
         if accountTypesInfo:
             BankRecordsForAccountTypes[accountNumberFromUUID] = accountTypesInfo
             BankRecordsForCustomer[accountNumberFromUUID] = customerInfo
+            CustomerAccountBalance[accountNumberFromUUID] = int(input("Enter Customer Initial Deposit"))
             print("\nCustomerInformation")
             print((BankRecordsForCustomer[accountNumberFromUUID]))
-            print((BankRecordsForAccountTypes[accountNumberFromUUID]))
-            print(f"AccountId is: {accountNumberFromUUID}\n")
-            AccountBalance = CustomerBalance()
-            CustomerAccountBalance[accountNumberFromUUID] = AccountBalance
+            print(f"AccountId is: {accountNumberFromUUID}")
+            print(f"Account Type is {accountTypesInfo} and the Customer balance is"
+                  f" {CustomerAccountBalance[accountNumberFromUUID]}\n")
             CustomerPinSettings()
 
 
@@ -54,7 +54,9 @@ def CustomerEnquires():
                 accountPin = int(input("Enter Pin"))
                 if CustomerPinsRecords[accountNumberForEnquiries] == accountPin:
                     print((BankRecordsForCustomer[accountNumberForEnquiries]))
-                    print((BankRecordsForAccountTypes[accountNumberForEnquiries]) + "\n")
+                    print(f"Account Type is {BankRecordsForAccountTypes[accountNumberForEnquiries]} and the Customer "
+                          f"balance is "
+                          f" {CustomerAccountBalance[accountNumberFromUUID]}\n")
             except ValueError as e:
                 print("Invalid pin")
             except KeyError as k:
@@ -66,7 +68,6 @@ def CustomerEnquires():
 def BankTransactions():
     ReturnValue = Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccountBalance)
     CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
-
 
 
 if __name__ == '__main__':

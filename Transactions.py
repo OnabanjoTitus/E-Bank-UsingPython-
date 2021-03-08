@@ -13,6 +13,10 @@ def Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccoun
                                 CustomerAccountBalance[AccountNumber] = CustomerAccountBalance[AccountNumber] - Amount
                                 ReturnValue = AccountNumber, CustomerAccountBalance[AccountNumber]
                                 return ReturnValue
+                            else:
+                                print("Insufficient Fund")
+                                ReturnValue = AccountNumber, CustomerAccountBalance[AccountNumber]
+                                return ReturnValue
                     except ValueError as v:
                         print("Invalid Pin")
             except KeyError as k:
