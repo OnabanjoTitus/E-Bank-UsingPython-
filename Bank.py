@@ -61,7 +61,7 @@ def CustomerEnquires():
                     print((BankRecordsForCustomer[accountNumberForEnquiries]))
                     print(f"Account Type is {BankRecordsForAccountTypes[accountNumberForEnquiries]} and the Customer "
                           f"balance is "
-                          f" {CustomerAccountBalance[accountNumberGlobal]}\n")
+                          f" {CustomerAccountBalance[accountNumberForEnquiries]}\n")
             except ValueError as e:
                 print("Invalid pin")
             except KeyError as k:
@@ -73,7 +73,16 @@ def CustomerEnquires():
 def BankTransactions():
     try:
         ReturnValue = Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccountBalance)
-        CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
+        if len(ReturnValue) == 2:
+            CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
+        if len(ReturnValue) == 4:
+            print(ReturnValue[0])
+            print(ReturnValue[1])
+            CustomerAccountBalance[ReturnValue[0]] = ReturnValue[1]
+            print(ReturnValue[2])
+            print(ReturnValue[3])
+            CustomerAccountBalance[ReturnValue[2]] = ReturnValue[3]
+            print(CustomerAccountBalance[ReturnValue[2]])
     except TypeError as e:
         print("Incorrect 1User Information")
 

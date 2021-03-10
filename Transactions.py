@@ -48,22 +48,18 @@ def Transactions(BankRecordsForAccountTypes, CustomerPinsRecords, CustomerAccoun
                     try:
                         AccountPin = int(input("Insert AccountPin"))
                         if CustomerPinsRecords[AccountNumberForSender] == AccountPin:
-                            print(CustomerAccountBalance[AccountNumberForSender])
                             Amount = int(input("Enter the Amount You Want To Transfer"))
                             if 0 <= Amount < CustomerAccountBalance[AccountNumberForSender]:
                                 AccountNumberForReceiver = input("Enter Receiver AccountId")
                                 if BankRecordsForAccountTypes[AccountNumberForReceiver]:
                                     CustomerAccountBalance[AccountNumberForSender] = CustomerAccountBalance[
-                                                                                         AccountNumberForSender] - Amount
-                                    ReturnValue1 = AccountNumberForSender, CustomerAccountBalance[
-                                        AccountNumberForSender]
+                                                                                         AccountNumberForSender]\
+                                                                                     - Amount
                                     CustomerAccountBalance[AccountNumberForReceiver] = \
                                         CustomerAccountBalance[AccountNumberForReceiver] + Amount
-                                    ReturnValue2 = AccountNumberForReceiver, \
-                                                   CustomerAccountBalance[AccountNumberForReceiver]
-                                    print(CustomerAccountBalance[AccountNumberForReceiver])
-                                    print(CustomerAccountBalance[AccountNumberForSender])
-                                    ReturnValues = ReturnValue1, ReturnValue2
+                                    ReturnValues = AccountNumberForSender, CustomerAccountBalance[
+                                        AccountNumberForSender], AccountNumberForReceiver, \
+                                        CustomerAccountBalance[AccountNumberForReceiver]
                                     return ReturnValues
                     except ValueError as v:
                         print("Invalid Pin")
